@@ -18,7 +18,7 @@ plt.colorbar()
 plt.grid(False)
 plt.show()"""
 
-# Normalization of Data (Pixel Values)
+# Normalization of Data (Pixel Color Values)
 train_images = train_images / 255.0
 test_images = test_images / 255.0
 
@@ -59,6 +59,9 @@ predictions = probability_model.predict(test_images)
 print(predictions[0])
 
 # The next lines gives a graphical representation of the predictions
+# class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress',
+#               'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankle boot']
+# referring to the numbers 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
 def plot_image(i, predictions_array, true_label, img):
     true_label, img = true_label[i], img[i]
     plt.grid(False)
@@ -102,6 +105,18 @@ for i in range(num_images):
 plt.tight_layout()
 plt.show()
 
+# The following code is meant to test a single selected image in the fashion MNIST library
+img = test_images[201]
 
+print(img.shape)
+img = (np.expand_dims(img, 0))
+print(img.shape)
+
+predictions_single = probability_model.predict(img)
+print(predictions_single)
+
+plot_value_array(1, predictions_single[0], test_labels)
+_ = plt.xticks(range(10), class_names, rotation=45)
+print(np.argmax(predictions_single[0]))
 
 
