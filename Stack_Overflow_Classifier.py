@@ -145,7 +145,7 @@ export_model = tf.keras.Sequential([
     layers.Activation('sigmoid')])
 
 export_model.compile(
-    loss=losses.BinaryCrossentropy(from_logits=False),
+    loss=losses.SparseCategoricalCrossentropy(from_logits=False),
     optimizer="adam",
     metrics=['accuracy'])
 
